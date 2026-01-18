@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design System for BA Prerna Organic Fertilizer E-commerce
+   Inspired by nature, soil, and organic farming aesthetics
+*/
+
+@layer base {
+  :root {
+    /* Core colors - Clean, friendly palette */
+    --background: 0 0% 100%;
+    --foreground: 220 60% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 60% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 60% 15%;
+
+    /* Primary - Brand Blue #002060 */
+    --primary: 220 100% 19%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Soft gray-blue */
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 220 60% 15%;
+
+    /* Muted - Light neutral */
+    --muted: 210 15% 95%;
+    --muted-foreground: 220 10% 45%;
+
+    /* Accent - Brand Green #7CD018 */
+    --accent: 88 80% 46%;
+    --accent-foreground: 220 100% 10%;
+
+    /* Leaf green - Brand Green for highlights */
+    --leaf: 88 80% 46%;
+    --leaf-foreground: 220 100% 10%;
+
+    /* Logo Blue - for branding elements */
+    --logo-blue: 220 100% 19%;
+    --logo-blue-foreground: 0 0% 100%;
+
+    /* Logo Green - for branding elements */
+    --logo-green: 88 80% 46%;
+    --logo-green-foreground: 220 100% 10%;
+
+    /* Soil brown - earthy tones */
+    --soil: 25 40% 30%;
+    --soil-foreground: 45 40% 98%;
+
+    /* Sun gold - warm accent */
+    --sun: 42 90% 55%;
+    --sun-foreground: 220 60% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 220 100% 19%;
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(88 80% 46% / 0.08) 0%, hsl(0 0% 100%) 50%, hsl(220 100% 19% / 0.05) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 20% 98%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(220 100% 19%) 0%, hsl(220 100% 25%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(88 80% 46%) 0%, hsl(88 80% 38%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(220 60% 15% / 0.08);
+    --shadow-card: 0 8px 32px -8px hsl(220 60% 15% / 0.1);
+    --shadow-elevated: 0 16px 48px -12px hsl(220 60% 15% / 0.12);
+
+    --sidebar-background: 0 0% 99%;
+    --sidebar-foreground: 220 60% 15%;
+    --sidebar-primary: 220 100% 19%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 20% 96%;
+    --sidebar-accent-foreground: 220 60% 15%;
+    --sidebar-border: 220 15% 90%;
+    --sidebar-ring: 220 100% 19%;
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 210 20% 95%;
+
+    --card: 220 25% 12%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 220 25% 12%;
+    --popover-foreground: 210 20% 95%;
+
+    --primary: 88 80% 50%;
+    --primary-foreground: 220 30% 8%;
+
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 210 20% 95%;
+
+    --muted: 220 20% 18%;
+    --muted-foreground: 210 15% 65%;
+
+    --accent: 88 80% 50%;
+    --accent-foreground: 220 30% 8%;
+
+    --leaf: 88 80% 50%;
+    --leaf-foreground: 220 30% 8%;
+
+    --logo-blue: 220 80% 60%;
+    --logo-blue-foreground: 0 0% 100%;
+
+    --logo-green: 88 80% 50%;
+    --logo-green-foreground: 220 30% 8%;
+
+    --soil: 25 30% 50%;
+    --soil-foreground: 0 0% 100%;
+
+    --sun: 42 90% 60%;
+    --sun-foreground: 220 30% 8%;
+
+    --destructive: 0 62.8% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 22%;
+    --input: 220 20% 22%;
+    --ring: 88 80% 50%;
+
+    --sidebar-background: 220 30% 8%;
+    --sidebar-foreground: 210 20% 95%;
+    --sidebar-primary: 88 80% 50%;
+    --sidebar-primary-foreground: 220 30% 8%;
+    --sidebar-accent: 220 20% 18%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 220 20% 22%;
+    --sidebar-ring: 88 80% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .bg-gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+}
