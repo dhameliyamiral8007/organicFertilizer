@@ -2,7 +2,10 @@ import { ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import type { Product } from '@/services/productService';
+import { useCart } from '@/components/context/CartContext';
+import { toast } from 'sonner';
 
 interface ProductCardProps {
   product: Product;
@@ -10,6 +13,17 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    toast.success(`${product.name} added to cart!`);
+  };
+
+  const handleViewDetails = () => {
+    navigate(`/product/${product.id}`);
+  };
   return (
     <motion.div
       className="group relative bg-card rounded-2xl overflow-hidden shadow-card hover:shadow-elevated transition-shadow duration-300 border border-border/50"
@@ -54,7 +68,7 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
             whileHover={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.2 }}
           >
-            <Button className="gap-2 bg-logo-green hover:bg-logo-green/90 text-logo-green-foreground">
+            <Button className="gap-2 bg-logo-green hover:bg-logo-green/90 text-logo-green-foreground" onClick={handleAddToCart}>
               <ShoppingCart className="w-4 h-4" />
               Add to Cart
             </Button>
@@ -102,7 +116,7 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
             <span className="text-sm text-muted-foreground ml-1">/ {product.weight}</span>
           </div>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button size="sm" variant="ghost" className="text-logo-green hover:text-logo-green hover:bg-logo-green/10 font-medium">
+            <Button size="sm" variant="ghost" className="text-logo-green hover:text-logo-green hover:bg-logo-green/10 font-medium" onClick={handleViewDetails}>
               View Details
             </Button>
           </motion.div>

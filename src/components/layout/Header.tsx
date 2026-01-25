@@ -1,12 +1,16 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ShoppingCart, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useCart } from '@/components/context/CartContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { getCartCount } = useCart();
+  const cartCount = getCartCount();
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -85,16 +89,18 @@ const Header = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <Button variant="ghost" size="icon" className="relative hover:bg-logo-green/10">
+            <Button variant="ghost" size="icon" className="relative hover:bg-logo-green/10" onClick={() => navigate('/checkout')}>
               <ShoppingCart className="h-5 w-5" />
-              <motion.span 
-                className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-logo-green text-[10px] font-bold text-logo-green-foreground flex items-center justify-center"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 500, delay: 0.5 }}
-              >
-                0
-              </motion.span>
+              {cartCount > 0 && (
+                <motion.span 
+                  className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-logo-green text-[10px] font-bold text-logo-green-foreground flex items-center justify-center"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 500, delay: 0.5 }}
+                >
+                  {cartCount}
+                </motion.span>
+              )}
             </Button>
           </motion.div>
           
@@ -105,7 +111,7 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button className="hidden md:flex bg-logo-green hover:bg-logo-green/90 text-logo-green-foreground shadow-md" size="sm">
+            <Button className="hidden md:flex bg-logo-green hover:bg-logo-green/90 text-logo-green-foreground shadow-md" size="sm" onClick={() => navigate('/products')}>
               Shop Now
             </Button>
           </motion.div>
@@ -182,7 +188,7 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.2 }}
               >
-                <Button className="mt-3 w-full bg-logo-green hover:bg-logo-green/90 text-logo-green-foreground" size="sm">
+                <Button className="mt-3 w-full bg-logo-green hover:bg-logo-green/90 text-logo-green-foreground" size="sm" onClick={() => navigate('/products')}>
                   Shop Now
                 </Button>
               </motion.div>
